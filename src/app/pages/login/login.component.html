@@ -1,0 +1,91 @@
+<div
+  class="text-custom-black min-h-screen w-[99vw] flex flex-col justify-center mx-auto"
+>
+  <div class="flex justify-center gap-1 text-[#c99c33]">
+    <ng-icon
+      name="bootstrapAirplaneEnginesFill"
+      class="text-3xl mt-auto"
+    ></ng-icon>
+    <p class="font-semibold text-3xl">OpenSKY</p>
+  </div>
+  <p class="text-3xl mx-auto font-semibold tracking-tight py-7">
+    Welcome back!
+  </p>
+  <p class="mx-auto">Please, enter your details</p>
+
+  <form
+    #logInForm="ngForm"
+    (ngSubmit)="handleLogIn()"
+    class="flex flex-col mx-auto"
+  >
+    <div class="flex flex-col mx-auto">
+      <label htmlFor="loginEmail" class="text-sm pb-1"> Email </label>
+      <input
+        name="loginEmail"
+        class="focus:border-2 border-[1px] rounded-lg p-3 sm:w-[30rem] w-80 bg-transparent border-[#2b2b39] focus:outline-none"
+        placeholder="Email"
+        ngModel
+        required
+        email
+        #loginEmail="ngModel"
+      />
+
+      <p
+        name="loginEmail"
+        component="div"
+        class="text-red-700"
+        *ngIf="loginEmail.invalid && loginEmail.touched"
+      >
+        Invalid email
+      </p>
+    </div>
+    <div class="flex flex-col mx-auto">
+      <label htmlFor="loginPassword" class="text-sm pb-1 mt-5">
+        Password
+      </label>
+
+      <div class="input-container relative">
+        <input
+          name="loginPassword"
+          class="focus:border-2 border-[1px] rounded-lg p-3 sm:w-[30rem] w-80 bg-transparent border-[#2b2b39] focus:outline-none"
+          placeholder="Enter password"
+          ngModel
+          required
+          password
+          #loginPassword="ngModel"
+          type="{{ showPassword }}"
+        />
+        <ng-icon
+          (click)="togglePassword()"
+          [name]="
+            showPassword == 'password'
+              ? 'bootstrapEyeFill'
+              : 'bootstrapEyeSlashFill'
+          "
+          class="cursor-pointer text-lg absolute top-[33%] right-[3%]"
+        ></ng-icon>
+        <p
+          name="loginEmail"
+          component="div"
+          class="text-red-700"
+          *ngIf="loginPassword.invalid && loginPassword.touched"
+        >
+          Password is required
+        </p>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="text-white text-md font-light px-10 py-2 bg-custom-blue sm:w-[30rem] w-80 mx-auto rounded-lg mt-3 disabled:opacity-50 transition-all duration-300"
+      [disabled]="!logInForm.valid || disableButton"
+    >
+      Log In
+    </button>
+  </form>
+  <a href="https://opensky-network.org/" target="__blank">
+    <small class="fixed bottom-1 left-1/2 -translate-x-2/4 text-custom-blue">
+      Learn more about OpenSky
+    </small>
+  </a>
+</div>
