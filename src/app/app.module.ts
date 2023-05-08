@@ -23,6 +23,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { DashboardlayoutComponent } from './components/dashboard/dashboardlayout/dashboardlayout.component';
 import { DashboardsidebarComponent } from './components/dashboard/dashboardsidebar/dashboardsidebar.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { FlightsComponent } from './components/flights/flights.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 const appRoutes: Routes = [
   {
@@ -48,6 +51,9 @@ const appRoutes: Routes = [
     DashboardlayoutComponent,
     DashboardsidebarComponent,
     LogoutComponent,
+    FlightsComponent,
+    StatisticsComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

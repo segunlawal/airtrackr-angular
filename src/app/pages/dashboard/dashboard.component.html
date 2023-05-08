@@ -1,1 +1,5 @@
-<p>dashboard works!</p>
+<ng-container *ngFor="let tab of tabs">
+  <div *ngIf="activeTab === tab.name" class="text-custom-blue ml-56">
+    <ng-container *ngComponentOutlet="tab.component"></ng-container>
+  </div>
+</ng-container>
