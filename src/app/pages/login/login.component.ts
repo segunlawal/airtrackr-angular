@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   templateUrl: './login.component.html',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   constructor(private toastr: ToastrService, private router: Router) {}
 
   showPassword: string = 'password';
@@ -15,11 +15,21 @@ export class LoginComponent {
   @ViewChild('logInForm')
   form!: NgForm;
 
+  ngOnInit() {
+    // Check for authentication
+    const token = localStorage.getItem('openSkyToken');
+    if (token) {
+      this.router.navigateByUrl('/dashboard');
+    }
+  }
+
   togglePassword() {
+    // Password visibility
     this.showPassword = this.showPassword === 'text' ? 'password' : 'text';
   }
 
   handleLogIn() {
+    // On log in button click
     this.disableButton = true;
     if (
       this.form.value.loginEmail === 'admin@gmail.com' &&
