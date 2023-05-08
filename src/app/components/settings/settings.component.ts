@@ -4,4 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-settings',
   templateUrl: './settings.component.html',
 })
-export class SettingsComponent {}
+export class SettingsComponent {
+  token: any = localStorage.getItem('openSkyToken');
+}
