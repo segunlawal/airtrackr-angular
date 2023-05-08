@@ -15,8 +15,14 @@ import {
   bootstrapEyeFill,
   bootstrapEyeSlashFill,
 } from '@ng-icons/bootstrap-icons';
+import { matFlightTakeoffOutline } from '@ng-icons/material-icons/outline';
+import { lucideBarChart3, lucideSettings } from '@ng-icons/lucide';
+import { ionLogOutOutline } from '@ng-icons/ionicons';
 
 import { ToastrModule } from 'ngx-toastr';
+import { DashboardlayoutComponent } from './components/dashboard/dashboardlayout/dashboardlayout.component';
+import { DashboardsidebarComponent } from './components/dashboard/dashboardsidebar/dashboardsidebar.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 const appRoutes: Routes = [
   {
@@ -29,18 +35,30 @@ const appRoutes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: DashboardlayoutComponent,
+    children: [{ path: '', component: DashboardComponent }],
   },
 ];
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, DashboardComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    DashboardComponent,
+    DashboardlayoutComponent,
+    DashboardsidebarComponent,
+    LogoutComponent,
+  ],
   imports: [
     BrowserModule,
     NgIconsModule.withIcons({
       bootstrapAirplaneEnginesFill,
       bootstrapEyeFill,
       bootstrapEyeSlashFill,
+      matFlightTakeoffOutline,
+      lucideBarChart3,
+      lucideSettings,
+      ionLogOutOutline,
     }),
     AppRoutingModule,
     RouterModule.forRoot(appRoutes, { enableTracing: false }),

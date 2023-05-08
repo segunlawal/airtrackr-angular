@@ -3,8 +3,19 @@
 @tailwind components;
 @tailwind utilities;
 @import "ngx-toastr/toastr";
-* {
+:root {
   font-family: "Manrope", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #f5f6fa;
+  background-color: #f5f6fa;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
 button {

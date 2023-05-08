@@ -1,0 +1,53 @@
+<div
+  class="hidden sm:flex fixed bg-custom-blue min-h-screen w-48 flex-col px-10"
+>
+  <!-- For large screens -->
+  <div class="flex items-center gap-2 pt-10 pb-20 text-[#c99c33]">
+    <ng-icon
+      name="bootstrapAirplaneEnginesFill"
+      class="text-3xl mt-auto"
+    ></ng-icon>
+    <p class="font-bold">OpenSKY</p>
+  </div>
+  <li
+    *ngFor="let item of links"
+    [ngClass]="[
+      'cursor-pointer',
+      'list-none',
+      'mb-10',
+      'grid',
+      'grid-cols-4',
+      'text-xl',
+      item.path === selectedLink ? 'font-semibold' : 'text-[#999999]'
+    ]"
+    (click)="handleTabClick(item.path)"
+  >
+    <ng-icon [name]="item.icon" class="my-auto"></ng-icon>
+    <p>{{ item.path }}</p>
+  </li>
+  <div class="fixed bottom-5">
+    <app-logout></app-logout>
+  </div>
+</div>
+
+<div
+  class="fixed bottom-0 sm:hidden flex justify-center gap-16 bg-custom-blue w-full"
+>
+  <li
+    *ngFor="let item of mobileLinks"
+    [ngClass]="[
+      'cursor-pointer',
+      'list-none',
+      'my-2',
+      'flex',
+      'flex-col',
+      'gap-3',
+      'text-lg',
+      item.path === selectedLink ? 'font-semibold' : 'text-[#999999]'
+    ]"
+    (click)="handleTabClick(item.path)"
+  >
+    <ng-icon [name]="item.icon" class="m-auto"></ng-icon>
+    <p>{{ item.path }}</p>
+  </li>
+</div>
