@@ -31,6 +31,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { SettingsComponent } from './components/settings/settings.component';
 
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const appRoutes: Routes = [
   {
@@ -80,6 +81,7 @@ const appRoutes: Routes = [
       timeOut: 3000,
     }),
     MatDialogModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

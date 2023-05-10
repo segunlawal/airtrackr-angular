@@ -1,27 +1,24 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FlightsApiService } from 'src/app/services/flights-api.service';
 import { Subscription } from 'rxjs';
 import { Flight } from 'src/app/models/flight';
-import { UtilisService } from 'src/app/utilis.service';
+import { UtilisService } from 'src/app/utils/utilis.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-
+import { PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-flights',
   templateUrl: './flights.component.html',
 })
-export class FlightsComponent {
+export class FlightsComponent implements OnInit {
   private stateChangedSubscription: Subscription;
   private displayChangedSubscription: Subscription;
-  flights: Array<Flight> = this.flightsService.getFlights();
+  flights: Array<Flight> = this.flightsService.getFlights().slice(0, 10);
   displayInfo: Array<number> = this.flightsService.getDisplayInfo();
   username!: string;
-  time1 = this.utilsService.unixToGMT(this.displayInfo[0]);
-  time2 = this.utilsService.unixToGMT(this.displayInfo[1]);
-  date1 = this.utilsService.unixToDate(this.displayInfo[0]);
-  date2 = this.utilsService.unixToDate(this.displayInfo[1]);
+  public pageSlice: Array<Flight> = this.flights.slice(0, 10);
 
   constructor(
     public flightsService: FlightsApiService,
@@ -36,6 +33,7 @@ export class FlightsComponent {
     this.stateChangedSubscription = this.flightsService.stateChanged.subscribe(
       (newState) => {
         this.flights = newState;
+        this.pageSlice = this.flights.slice(0, 10);
       }
     );
     this.displayChangedSubscription =
@@ -43,8 +41,10 @@ export class FlightsComponent {
         this.displayInfo = newState;
       });
   }
+  ngOnInit(): void {}
 
   openDialog(): void {
+    // Open search modal
     const isSmallScreen = window.matchMedia('(max-width: 640px)').matches;
 
     const width = isSmallScreen ? '90%' : '50%';
@@ -63,6 +63,17 @@ export class FlightsComponent {
       date1.getDate() === date2.getDate()
     );
   }
+
+  OnPageChange(event: PageEvent) {
+    // Handle pagination
+    const startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    if (endIndex > this.flights.length) {
+      endIndex = this.flights.length;
+    }
+    this.pageSlice = this.flights.slice(startIndex, endIndex);
+  }
+
   ngOnDestroy() {
     // unsubscribe from the stateChanged subscription to prevent memory leaks
     this.stateChangedSubscription.unsubscribe();
@@ -85,7 +96,6 @@ export class SearchmodalComponent {
   @ViewChild('myForm') form!: NgForm;
   disableButton: boolean = false;
   searchSuccess: boolean = false;
-  // flights: Array<Flight> = this.flightsService.getFlights();
 
   getDifference(from: string, to: string): boolean {
     // Check if time difference is more than 2 hours

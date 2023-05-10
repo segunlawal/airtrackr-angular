@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import axios from 'axios';
 import { Flight } from '../models/flight';
 import { ToastrService } from 'ngx-toastr';
-import { UtilisService } from '../utilis.service';
+import { UtilisService } from '../utils/utilis.service';
 import * as moment from 'moment';
 
 @Injectable({

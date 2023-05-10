@@ -70,7 +70,7 @@
 
   <div *ngIf="!flightsService.isLoading">
     <div
-      *ngFor="let item of flights"
+      *ngFor="let item of pageSlice"
       class="bg-white border-b-4 border-double p-5 grid grid-cols-4 gap-6 md:gap-16 lg:gap-36 xl:gap-56 rounded-lg"
     >
       <p class="my-auto text-custom-blue">
@@ -96,5 +96,13 @@
         {{ this.utilsService.unixToDate(item.firstSeen) }}
       </p>
     </div>
+    <mat-paginator
+      #paginator
+      [length]="this.flights.length"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="OnPageChange($event)"
+    >
+    </mat-paginator>
   </div>
 </div>
