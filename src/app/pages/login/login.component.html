@@ -30,12 +30,7 @@
         #loginEmail="ngModel"
       />
 
-      <p
-        name="loginEmail"
-        component="div"
-        class="text-red-700"
-        *ngIf="loginEmail.invalid && loginEmail.touched"
-      >
+      <p class="text-red-700" *ngIf="loginEmail.invalid && loginEmail.touched">
         Invalid email
       </p>
     </div>
@@ -65,8 +60,6 @@
           class="cursor-pointer text-lg absolute top-[33%] right-[3%]"
         ></ng-icon>
         <p
-          name="loginEmail"
-          component="div"
           class="text-red-700"
           *ngIf="loginPassword.invalid && loginPassword.touched"
         >

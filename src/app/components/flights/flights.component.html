@@ -6,10 +6,49 @@
 
   <p class="py-5">
     Want to search through a time range?
-    <span class="bg-light text-custom-blue font-semibold cursor-pointer">
+    <span
+      class="bg-light text-custom-blue font-semibold cursor-pointer"
+      (click)="openDialog()"
+    >
       Click here
     </span>
   </p>
+
+  <div class="flex sm:gap-5">
+    <p class="font-semibold">RESULT ({{ flights.length }})</p>
+    <div class="flex flex-col my-auto">
+      <ng-container *ngIf="isSameDay(displayInfo); else differentDay">
+        <small>
+          These are flights arriving between
+          <span class="text-custom-blue font-semibold">{{
+            this.utilsService.unixToGMT(displayInfo[0])
+          }}</span>
+          and
+          <span class="text-custom-blue font-semibold">{{
+            this.utilsService.unixToGMT(displayInfo[1])
+          }}</span>
+          on
+          <span class="text-custom-blue font-semibold">{{
+            this.utilsService.unixToDate(displayInfo[0])
+          }}</span>
+        </small>
+      </ng-container>
+      <ng-template #differentDay>
+        <small>
+          These are flights arriving between
+          <span class="text-custom-blue font-semibold"
+            >{{ this.utilsService.unixToGMT(displayInfo[0]) }}
+            {{ this.utilsService.unixToDate(displayInfo[0]) }}</span
+          >
+          and
+          <span class="text-custom-blue font-semibold"
+            >{{ this.utilsService.unixToGMT(displayInfo[1]) }}
+            {{ this.utilsService.unixToDate(displayInfo[1]) }}</span
+          >
+        </small>
+      </ng-template>
+    </div>
+  </div>
 
   <div
     class="bg-white sticky top-0 text-sm text-custom-blue font-bold px-5 py-2 border-b-4 grid grid-cols-4 gap-6 md:gap-16 lg:gap-36 xl:gap-56"
@@ -25,6 +64,9 @@
   <div *ngIf="flightsService.isLoading">
     <p>Loading...</p>
   </div>
+  <div *ngIf="flights.length == 0 && !flightsService.isLoading">
+    <p class="text-center">No flights available...</p>
+  </div>
 
   <div *ngIf="!flightsService.isLoading">
     <div
@@ -39,7 +81,7 @@
           {{ item.estDepartureAirport }}
         </p>
         <p class="sm:text-md text-xs">
-          {{ unixToGMT(item.firstSeen) }}
+          {{ this.utilsService.unixToGMT(item.firstSeen) }}
         </p>
       </div>
       <div class="flex flex-col items-center justify-center">
@@ -47,11 +89,11 @@
           {{ item.estArrivalAirport }}
         </p>
         <p class="sm:text-md text-xs">
-          {{ unixToGMT(item.lastSeen) }}
+          {{ this.utilsService.unixToGMT(item.lastSeen) }}
         </p>
       </div>
       <p class="m-auto text-sm">
-        {{ unixToDate(item.firstSeen) }}
+        {{ this.utilsService.unixToDate(item.firstSeen) }}
       </p>
     </div>
   </div>

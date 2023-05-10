@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 @import "ngx-toastr/toastr";
+* {
+  font-family: "Manrope", sans-serif;
+}
 :root {
   font-family: "Manrope", sans-serif;
   line-height: 1.5;
@@ -47,4 +50,13 @@ body {
   min-width: 320px;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

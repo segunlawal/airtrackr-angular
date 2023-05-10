@@ -23,9 +23,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { DashboardlayoutComponent } from './components/dashboard/dashboardlayout/dashboardlayout.component';
 import { DashboardsidebarComponent } from './components/dashboard/dashboardsidebar/dashboardsidebar.component';
 import { LogoutComponent } from './components/logout/logout.component';
-import { FlightsComponent } from './components/flights/flights.component';
+import {
+  FlightsComponent,
+  SearchmodalComponent,
+} from './components/flights/flights.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { SettingsComponent } from './components/settings/settings.component';
+
+import { MatDialogModule } from '@angular/material/dialog';
 
 const appRoutes: Routes = [
   {
@@ -54,6 +59,7 @@ const appRoutes: Routes = [
     FlightsComponent,
     StatisticsComponent,
     SettingsComponent,
+    SearchmodalComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +79,7 @@ const appRoutes: Routes = [
     ToastrModule.forRoot({
       timeOut: 3000,
     }),
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
