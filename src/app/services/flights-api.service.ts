@@ -4,6 +4,7 @@ import { Flight } from '../models/flight';
 import { ToastrService } from 'ngx-toastr';
 import { UtilisService } from '../utils/utilis.service';
 import * as moment from 'moment';
+import { Airports } from '../models/airports';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,9 @@ export class FlightsApiService {
   private displayInfo: Array<number> = [];
   displayInfoChanged = new EventEmitter<Array<number>>();
 
+  private airportInfo: Array<Airports> = [];
+  airportInfoChanged = new EventEmitter<Array<Airports>>();
+
   private getDateRange() {
     const currentDate = Date.now() / 1000;
     const begin = Math.floor(currentDate - 7200);
@@ -24,6 +28,7 @@ export class FlightsApiService {
   }
 
   isLoading: boolean = false;
+  rangeLoading: boolean = false;
 
   constructor(
     private toastr: ToastrService,
@@ -84,5 +89,31 @@ export class FlightsApiService {
     } catch (error) {
       // Handle error
     }
+  }
+
+  getFlightsForAirports() {
+    const currentDate = Date.now() / 1000;
+    const begin = Math.floor(currentDate - 3600);
+    const end = Math.floor(currentDate + 3600);
+    this.rangeLoading = true;
+    axios
+      .get(
+        `https://opensky-network.org/api/flights/all?begin=${begin}&end=${end}`
+      )
+      .then((response) => {
+        const filArray = this.utilsService.sortFlights(
+          response.data
+        ) as Airports[];
+        this.setFlightsForAirports(filArray);
+        this.rangeLoading = false;
+      })
+      .catch((error) => {
+        this.toastr.error(error.message);
+      });
+    return [];
+  }
+  setFlightsForAirports(newState: Array<Airports>) {
+    this.airportInfo = newState;
+    this.airportInfoChanged.emit(newState);
   }
 }

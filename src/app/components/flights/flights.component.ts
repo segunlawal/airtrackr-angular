@@ -53,17 +53,6 @@ export class FlightsComponent implements OnInit {
     });
   }
 
-  isSameDay(displayInfo: Array<number>) {
-    //Check if dates are the same day
-    const date1 = new Date(displayInfo[0] * 1000);
-    const date2 = new Date(displayInfo[1] * 1000);
-    return (
-      date1.getFullYear() === date2.getFullYear() &&
-      date1.getMonth() === date2.getMonth() &&
-      date1.getDate() === date2.getDate()
-    );
-  }
-
   OnPageChange(event: PageEvent) {
     // Handle pagination
     const startIndex = event.pageIndex * event.pageSize;
