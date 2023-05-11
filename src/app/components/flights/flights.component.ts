@@ -19,6 +19,17 @@ export class FlightsComponent implements OnInit {
   displayInfo: Array<number> = this.flightsService.getDisplayInfo();
   username!: string;
   public pageSlice: Array<Flight> = this.flights.slice(0, 10);
+  search!: string;
+
+  updatePageSlice(): void {
+    this.pageSlice = this.flights
+      .filter((item) => {
+        return this.search.toLowerCase() === ''
+          ? item
+          : item.callsign.toLowerCase().includes(this.search.toLowerCase());
+      })
+      .slice(0, 10);
+  }
 
   constructor(
     public flightsService: FlightsApiService,
@@ -61,6 +72,7 @@ export class FlightsComponent implements OnInit {
       endIndex = this.flights.length;
     }
     this.pageSlice = this.flights.slice(startIndex, endIndex);
+    this.updatePageSlice();
   }
 
   ngOnDestroy() {
