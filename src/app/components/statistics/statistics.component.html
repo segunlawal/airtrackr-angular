@@ -1,5 +1,5 @@
 <div
-  class="sm:pl-60 pl-5 py-3 flex flex-col text-left font-semibold text-custom-blue"
+  class="sm:pl-60 pl-5 py-3 pb-24 flex flex-col text-left font-semibold text-custom-blue"
 >
   <p class="text-2xl">STATISTICS</p>
 
@@ -63,7 +63,7 @@
 
   <div *ngIf="!flightsService.rangeLoading">
     <div
-      *ngFor="let item of airportInfo"
+      *ngFor="let item of pageSlice"
       class="bg-white font-normal border-b-4 border-double p-5 grid grid-cols-4 gap-6 md:gap-16 lg:gap-36 xl:gap-56 rounded-lg"
     >
       <p class="font-semibold">
@@ -79,5 +79,13 @@
         {{ item.departing }}
       </p>
     </div>
+    <mat-paginator
+      #paginator
+      [length]="this.airportInfo.length"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="OnPageChange($event)"
+    >
+    </mat-paginator>
   </div>
 </div>
