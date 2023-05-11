@@ -14,7 +14,7 @@
         Click here
       </span>
     </p>
-    <div class="my-auto">
+    <div class="my-auto sm:p-0 pb-4">
       <input
         class="focus:border-2 border-[1px] p-2 rounded-lg bg-transparent border-[#2b2b39] focus:outline-none"
         placeholder="Search for a flight"
@@ -25,7 +25,9 @@
   </div>
 
   <div class="flex sm:gap-5">
-    <p class="font-semibold">RESULT ({{ flights.length }})</p>
+    <p class="font-semibold sm:text-md text-sm">
+      RESULT ({{ flights.length }})
+    </p>
     <div class="md:flex md:justify-between">
       <div class="flex flex-col my-auto">
         <ng-container
