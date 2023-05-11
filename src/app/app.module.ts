@@ -33,6 +33,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ErrorpageComponent } from './pages/errorpage/errorpage.component';
+import { LoadingspinnerComponent } from './components/loadingspinner/loadingspinner.component';
 
 const appRoutes: Routes = [
   {
@@ -68,6 +69,7 @@ const appRoutes: Routes = [
     SettingsComponent,
     SearchmodalComponent,
     ErrorpageComponent,
+    LoadingspinnerComponent,
   ],
   imports: [
     BrowserModule,

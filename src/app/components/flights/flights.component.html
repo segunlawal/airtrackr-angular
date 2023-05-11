@@ -78,7 +78,7 @@
   </div>
 
   <div *ngIf="flightsService.isLoading">
-    <p>Loading...</p>
+    <app-loadingspinner> </app-loadingspinner>
   </div>
   <div *ngIf="flights.length == 0 && !flightsService.isLoading">
     <p class="text-center">No flights available...</p>

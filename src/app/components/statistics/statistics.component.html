@@ -2,44 +2,55 @@
   class="sm:pl-60 pl-5 py-3 pb-24 flex flex-col text-left font-semibold text-custom-blue"
 >
   <p class="text-2xl text-[#c99c33]">STATISTICS</p>
-
-  <div class="flex flex-col my-auto text-lg text-custom-black font-normal">
-    <ng-container
-      *ngIf="this.utilsService.isSameDay(rangeInfo); else differentDay"
+  <div class="md:flex md:justify-between">
+    <div
+      class="flex flex-col my-auto text-lg text-custom-black font-normal leading-6"
     >
-      <small>
-        This is airport information about flights between
+      <ng-container
+        *ngIf="this.utilsService.isSameDay(rangeInfo); else differentDay"
+      >
+        <small>
+          This is airport information about flights between
 
-        <span class="text-custom-blue font-semibold">{{
-          this.utilsService.unixToGMT(rangeInfo[0])
-        }}</span>
-        and
-        <span class="text-custom-blue font-semibold">{{
-          this.utilsService.unixToGMT(rangeInfo[1])
-        }}</span>
-        on
-        <span class="text-custom-blue font-semibold">{{
-          this.utilsService.unixToDate(rangeInfo[0])
-        }}</span>
-      </small>
-    </ng-container>
-    <ng-template #differentDay>
-      <small>
-        This is airport information about flights between
-        <span class="text-custom-blue font-semibold"
-          >{{ this.utilsService.unixToGMT(rangeInfo[0]) }}
-          {{ this.utilsService.unixToDate(rangeInfo[0]) }}</span
-        >
-        and
-        <span class="text-custom-blue font-semibold"
-          >{{ this.utilsService.unixToGMT(rangeInfo[1]) }}
-          {{ this.utilsService.unixToDate(rangeInfo[1]) }}</span
-        >
-      </small>
-    </ng-template>
-    <small
-      >The time is the most recent arrival or departure at the airport</small
-    >
+          <span class="text-custom-blue font-semibold">{{
+            this.utilsService.unixToGMT(rangeInfo[0])
+          }}</span>
+          and
+          <span class="text-custom-blue font-semibold">{{
+            this.utilsService.unixToGMT(rangeInfo[1])
+          }}</span>
+          on
+          <span class="text-custom-blue font-semibold">{{
+            this.utilsService.unixToDate(rangeInfo[0])
+          }}</span>
+        </small>
+      </ng-container>
+      <ng-template #differentDay>
+        <small>
+          This is airport information about flights between
+          <span class="text-custom-blue font-semibold"
+            >{{ this.utilsService.unixToGMT(rangeInfo[0]) }}
+            {{ this.utilsService.unixToDate(rangeInfo[0]) }}</span
+          >
+          and
+          <span class="text-custom-blue font-semibold"
+            >{{ this.utilsService.unixToGMT(rangeInfo[1]) }}
+            {{ this.utilsService.unixToDate(rangeInfo[1]) }}</span
+          >
+        </small>
+      </ng-template>
+      <small
+        >The time is the most recent arrival or departure at the airport</small
+      >
+    </div>
+    <div class="my-auto sm:p-0 pb-4">
+      <input
+        class="focus:border-2 border-[1px] p-2 rounded-lg bg-transparent border-[#2b2b39] focus:outline-none"
+        placeholder="Search for an airport"
+        [(ngModel)]="search"
+        (input)="updatePageSlice()"
+      />
+    </div>
   </div>
 
   <div
@@ -55,7 +66,7 @@
   </div>
 
   <div *ngIf="flightsService.rangeLoading">
-    <p>Loading...</p>
+    <app-loadingspinner></app-loadingspinner>
   </div>
   <div *ngIf="airportInfo.length == 0 && !flightsService.rangeLoading">
     <p class="text-center">No flights available...</p>

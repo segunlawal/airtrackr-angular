@@ -4,6 +4,9 @@
     #myForm="ngForm"
     class="flex flex-col items-center"
   >
+    <div *ngIf="modalLoad">
+      <app-loadingspinner> </app-loadingspinner>
+    </div>
     <p class="font-bold text-custom-blue text-center text-lg">
       Search through a time range of arriving flights
     </p>

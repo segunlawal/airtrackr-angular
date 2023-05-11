@@ -17,7 +17,17 @@ export class StatisticsComponent {
     .getFlightsForAirports()
     .slice(0, 10);
   public pageSlice: Array<Airports> = this.airportInfo.slice(0, 10);
+  search!: string;
 
+  updatePageSlice(): void {
+    this.pageSlice = this.airportInfo
+      .filter((item) => {
+        return this.search.toLowerCase() === ''
+          ? item
+          : item.airport.toLowerCase().includes(this.search.toLowerCase());
+      })
+      .slice(0, 10);
+  }
   constructor(
     public utilsService: UtilisService,
     public flightsService: FlightsApiService
@@ -42,6 +52,7 @@ export class StatisticsComponent {
       endIndex = this.airportInfo.length;
     }
     this.pageSlice = this.airportInfo.slice(startIndex, endIndex);
+    this.updatePageSlice();
   }
 
   ngOnDestroy() {

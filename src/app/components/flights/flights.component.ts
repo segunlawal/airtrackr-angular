@@ -97,6 +97,7 @@ export class SearchmodalComponent {
   @ViewChild('myForm') form!: NgForm;
   disableButton: boolean = false;
   searchSuccess: boolean = false;
+  modalLoad: boolean = false;
 
   getDifference(from: string, to: string): boolean {
     // Check if time difference is more than 2 hours
@@ -107,11 +108,13 @@ export class SearchmodalComponent {
   }
   async handleSearch() {
     this.disableButton = true;
+    this.modalLoad = true;
     await this.flightsService.searchTimeRange(
       this.form.value.fromDate,
       this.form.value.toDate
     );
     this.dialogRef.close();
+    this.modalLoad = false;
     this.toastr.success('Flights search successful');
     this.disableButton = false;
   }
