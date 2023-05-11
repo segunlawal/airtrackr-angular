@@ -32,6 +32,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ErrorpageComponent } from './pages/errorpage/errorpage.component';
 
 const appRoutes: Routes = [
   {
@@ -47,6 +48,11 @@ const appRoutes: Routes = [
     component: DashboardlayoutComponent,
     children: [{ path: '', component: DashboardComponent }],
   },
+  {
+    path: '**',
+    pathMatch: 'full',
+    component: ErrorpageComponent,
+  },
 ];
 
 @NgModule({
@@ -61,6 +67,7 @@ const appRoutes: Routes = [
     StatisticsComponent,
     SettingsComponent,
     SearchmodalComponent,
+    ErrorpageComponent,
   ],
   imports: [
     BrowserModule,
