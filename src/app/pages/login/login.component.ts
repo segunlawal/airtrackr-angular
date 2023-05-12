@@ -35,12 +35,15 @@ export class LoginComponent implements OnInit {
       this.form.value.loginEmail === 'admin@gmail.com' &&
       this.form.value.loginPassword === 'admin'
     ) {
-      this.toastr.success('Login successful');
       localStorage.setItem('openSkyToken', this.form.value.loginEmail);
-      this.router.navigateByUrl('/dashboard');
+      setTimeout(() => {
+        this.router.navigateByUrl('/dashboard');
+        this.toastr.success('Login successful');
+        this.disableButton = false;
+      }, 1000);
     } else {
       this.toastr.error('Invalid username or password');
+      this.disableButton = false;
     }
-    this.disableButton = false;
   }
 }
