@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FlightsApiService } from 'src/app/services/flights-api.service';
 import { Subscription } from 'rxjs';
 import { Flight } from 'src/app/models/flight';
@@ -12,7 +12,7 @@ import { PageEvent } from '@angular/material/paginator';
   selector: 'app-flights',
   templateUrl: './flights.component.html',
 })
-export class FlightsComponent implements OnInit {
+export class FlightsComponent {
   private stateChangedSubscription: Subscription;
   private displayChangedSubscription: Subscription;
   flights: Array<Flight> = this.flightsService.getFlights().slice(0, 10);
@@ -24,9 +24,10 @@ export class FlightsComponent implements OnInit {
   updatePageSlice(): void {
     this.pageSlice = this.flights
       .filter((item) => {
-        return this.search.toLowerCase() === ''
-          ? item
-          : item.callsign.toLowerCase().includes(this.search.toLowerCase());
+        return (
+          this.search.toLowerCase() === '' ||
+          item.callsign.toLowerCase().includes(this.search.toLowerCase())
+        );
       })
       .slice(0, 10);
   }
@@ -52,7 +53,6 @@ export class FlightsComponent implements OnInit {
         this.displayInfo = newState;
       });
   }
-  ngOnInit(): void {}
 
   openDialog(): void {
     // Open search modal
@@ -72,7 +72,6 @@ export class FlightsComponent implements OnInit {
       endIndex = this.flights.length;
     }
     this.pageSlice = this.flights.slice(startIndex, endIndex);
-    this.updatePageSlice();
   }
 
   ngOnDestroy() {

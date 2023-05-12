@@ -13,6 +13,7 @@ export class UtilisService {
     const gmtTimeStr = `${hours}:${minutes} GMT`;
     return gmtTimeStr;
   }
+
   unixToDate(unixTime: number) {
     const date = new Date(unixTime * 1000);
     const dateStr = date.toLocaleString('en-US', {
@@ -22,7 +23,9 @@ export class UtilisService {
     });
     return dateStr;
   }
+
   filterFlights(flights: Array<Flight>) {
+    // Remove null instances
     return flights?.filter((flight) => {
       if (
         flight.estArrivalAirport === null ||
@@ -36,7 +39,7 @@ export class UtilisService {
   }
 
   isSameDay(displayInfo: Array<number>) {
-    //Check if dates are the same day
+    // Check if two unix times are on the same day
     const date1 = new Date(displayInfo[0] * 1000);
     const date2 = new Date(displayInfo[1] * 1000);
     return (
@@ -47,6 +50,7 @@ export class UtilisService {
   }
 
   sortFlights(flights: Array<Flight>) {
+    // Get new array from flights array
     const uniqueAirports = [
       ...new Set(
         flights
@@ -54,7 +58,6 @@ export class UtilisService {
           .concat(flights.map((obj) => obj.estDepartureAirport))
       ),
     ];
-
     // Create a new array with airport information
     const airportArray = uniqueAirports.reduce(
       (arr: Array<Airports>, airport) => {
@@ -86,7 +89,6 @@ export class UtilisService {
             lastSeen,
           });
         }
-
         return arr;
       },
       []

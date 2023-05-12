@@ -38,6 +38,7 @@ export class FlightsApiService {
   }
 
   getFlights() {
+    // Fetch flights
     const { begin, end } = this.getDateRange();
     this.isLoading = true;
     axios
@@ -62,7 +63,6 @@ export class FlightsApiService {
 
   getDisplayInfo() {
     const { begin, end } = this.getDateRange();
-
     this.setDisplayInfo([begin, end]);
     return this.displayInfo;
   }
@@ -75,12 +75,10 @@ export class FlightsApiService {
     // Search within a time range
     const begin = moment(fromDate, 'YYYY-MM-DD HH:mm').unix();
     const end = moment(toDate, 'YYYY-MM-DD HH:mm').unix();
-
     try {
       const response = await fetch(
         `https://opensky-network.org/api/flights/all?begin=${begin}&end=${end}`
       );
-
       const data = await response.json();
       this.flights = data as Flight[];
       const filteredFlights = this.utilsService.filterFlights(this.flights);
@@ -92,6 +90,7 @@ export class FlightsApiService {
   }
 
   getFlightsForAirports() {
+    // Get info for statistics
     const currentDate = Date.now() / 1000;
     const begin = Math.floor(currentDate - 3600);
     const end = Math.floor(currentDate + 3600);

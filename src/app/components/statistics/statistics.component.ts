@@ -52,7 +52,6 @@ export class StatisticsComponent {
       endIndex = this.airportInfo.length;
     }
     this.pageSlice = this.airportInfo.slice(startIndex, endIndex);
-    this.updatePageSlice();
   }
 
   ngOnDestroy() {
