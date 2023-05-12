@@ -1,27 +1,45 @@
-# AngularOpensky
+# 🚀AirTrackr
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.0.
+This app shows flights arriving and departing from airports around the world
 
-## Development server
+### LIVE LINK
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+https://airtrackr-angular.vercel.app/
 
-## Code scaffolding
+### LOGIN DETAILS
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Email: "admin@gmail.com"
 
-## Build
+Password: "admin"
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## API Reference
 
-## Running unit tests
+#### https://openskynetwork.github.io/opensky-api/
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Tech Stack
 
-## Running end-to-end tests
+Angular, TailwindCSS
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+This project was generated with Angular CLI version 16.0.0.
 
-## Further help
+## Run Locally
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Clone the project
+
+```bash
+  git clone https://github.com/segunlawal/airtrackr-angular.git
+```
+
+Go to the project directory
+
+```bash
+  cd airtrackr-angular
+```
+
+### Development Server
+
+Run ng serve for a dev server. Navigate to http://localhost:4200/. The application will automatically reload if you change any of the source files.
+
+### Build
+
+Run ng build to build the project. The build artifacts will be stored in the dist/ directory.
